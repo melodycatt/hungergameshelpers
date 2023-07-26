@@ -11,8 +11,23 @@ function getDataAction() {
         console.log(match.match(/[0-9]*/g))
         return 'this.players' + match[0] + ((match.match(/[0-9]+/g)[0] * 1) -1).toString()
     }) +  "\", " + actionPlayers + ", '" + `[${itemGained}, ${(itemGainedPlayer.value * 1)}]` + "', '" + `[${itemLost}, ${(itemLostPlayer.value * 1)}]` + "', '" + `[${itemNeeded}, ${(itemNeededPlayer.value * 1)}]` + "'"
-    console.log(data)
+    actions.push(data)
 }
+
+let actions = []
+
+function download() {
+    var file = new Blob([`[${actions}]`], {type: "text"});
+    var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = 'data.txt';
+    a.click();
+    setTimeout(function() {
+        window.URL.revokeObjectURL(url);  
+    }, 0); 
+}
+
 
 let clipboard;
 let itemGained = 'Presets.Items.null';
