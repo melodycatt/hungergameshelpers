@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>hunger games helping stuff</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div>Create Actions:</div>
+        <div>
+            <label for="eventName">Action Text (to put in a player name type [1], [2], [3] and so on with the number in the brackets being the player number):</label>
+            <input id="eventName" type="text">
+        </div>
+        <div>
+            <span>Item Gained (leave empty if none)</span>
+            <button id="itemGainedPaste" onclick="itemGained = clipboard">Paste Item</button> 
+            <button id="itemGainedClear" onclick="itemGained = 'Presets.Items.null'">Clear Item</button>
+            <label for="itemGainedPlayer">Which player gains the item? (use numbers, ', ' as separator if multiple)</label>
+            <input id="itemGainedPlayer" type="text">
+        </div>
+        <div>
+            <span>Item Lost (leave empty if none)</span>
+            <button id="itemLostPaste" onclick="itemLost = clipboard">Paste Item</button> 
+            <button id="itemLostClear" onclick="itemLost = 'Presets.Items.null'">Clear Item</button>
+            <label for="itemLostPlayer">Which player loses the item? (use numbers, ', ' as separator if multiple)</label>
+            <input id="itemLostPlayer" type="text">
+        </div>
+        <div>
+            <span>Item Required for the event (leave empty if none)</span>
+            <button id="itemRequiredPaste" onclick="itemNeeded = clipboard">Paste Item</button> 
+            <button id="itemRequiredClear" onclick="itemNeeded = 'Presets.Items.null'">Clear Item</button>
+            <label for="itemRequiredPlayer">Which player needs the item? (use numbers, ', ' as separator if multiple)</label>
+            <input id="itemRequiredPlayer" type="text">
+        </div>
+        <div>
+            <button id="saveAction" onclick="getDataAction()">Save</button>
+        </div>
+        <div>Item Generator</div>
+        <div>
+            <label for="itemName">Item Name:</label>
+            <input type="text" name="itemName" id="itemName">
+        </div>
+        <div>
+            <label for="itemCount">Item Count:</label>
+            <input type="number" name="itemCount" id="itemCount">
+        </div>
+        <div>
+            <label for="itemType">Item Type:</label>
+            <select id="itemType">
+                <option value="weapon">Weapon</option>
+                <option value="food">Food</option>
+            </select>
+        </div>
+    </body>
+</html>
