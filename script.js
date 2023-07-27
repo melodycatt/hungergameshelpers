@@ -5,16 +5,36 @@ function getDataAction() {
     const itemGainedPlayer = document.getElementById('itemGainedPlayer');
     const itemLostPlayer = document.getElementById('itemLostPlayer');
     const itemNeededPlayer = document.getElementById('itemRequiredPlayer');    
-    data = 'new Action(\"' + actionText.value.replace(/\[([^\[\]]+)/g, (match) => {
+    data = 'new Action(\"' + actionText.value.replace(/\[[0-9]+\]/g, (match) => {
         actionPlayers++
         console.log(match)
         console.log(match.match(/[0-9]*/g))
-        return 'this.players' + match[0] + ((match.match(/[0-9]+/g)[0] * 1) -1).toString()
-    }) +  "\", " + actionPlayers + ", '" + `[${itemGained}, ${(itemGainedPlayer.value * 1)}]` + "', '" + `[${itemLost}, ${(itemLostPlayer.value * 1)}]` + "', '" + `[${itemNeeded}, ${(itemNeededPlayer.value * 1)}]` + "'"
+        return "' + this.players" + match + ".name + '"
+    }).replace(/^\'\ \+\ /, '').replace(/\ \+\ \'$/, '') +  "\", " + actionPlayers + ", '" + `[${itemGained}, ${(itemGainedPlayer.value * 1)}]` + "', '" + `[${itemLost}, ${(itemLostPlayer.value * 1)}]` + "', '" + `[${itemNeeded}, ${(itemNeededPlayer.value * 1)}]` + "'"
     actions.push(data)
+    const addedAction = document.createElement('div');
+    addedAction.innerHTML = data
+    addedAction.id = 'addedAction' + (actions.length - 1).toString()
+    addedAction.style.display = 'inline-block'
+    document.getElementById('addedActions').appendChild(addedAction)
+    const trashCan = trashCanElm.cloneNode()
+    trashCan.setAttribute('onclick', 'deleteAction(' + (actions.length - 1).toString() + ')')
+    trashCan.id = 'trashCan' + (actions.length - 1).toString()
+    trashCan.style.display = 'inline-block'
+    document.getElementById('addedActions').appendChild(trashCan)
 }
 
 let actions = []
+
+let trashCanElm = document.createElement('img')
+trashCanElm.src = 'trash.png'
+trashCanElm.style.width = '12px'
+trashCanElm.style.marginLeft = '5px'
+
+function deleteAction (i) {
+    document.getElementById('addedAction' + i).remove()
+    document.getElementById('trashCan' + i).remove()
+}
 
 function download() {
     var file = new Blob([`[${actions}]`], {type: "text"});
